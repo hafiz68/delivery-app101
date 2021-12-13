@@ -14,6 +14,7 @@ const sendingmail = async(email, mailText) =>{
             auth: {
               user: process.env.GMAIL_ACC,
               pass: process.env.GMAIL_PASS,
+              accessToken: tokengenerator()
             }
           }));
         let mailOptions = {
