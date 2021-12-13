@@ -21,7 +21,7 @@ app.use("/", (req, res)=>{
 
 
 sequelize.sync().then((result) => {
-    app.listen(5000, '192.168.0.171', ()=>{
+    app.listen('delivery-app101.herokuapp.com', ()=>{
         console.log("You are on port 5000");
     });
 }).catch(err => {
