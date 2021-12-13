@@ -4,16 +4,11 @@ const {Sequelize} = require('sequelize');
 
 // const db = {};
 
-const sequelize = new Sequelize('dae80ub29525jp', 'yxrqrgiuosbwtb', 'edb19b0dddbd94c84a7d6b766d969f64388570fcd75ac88bdb63060d92759635', {
-    host: 'ec2-18-214-214-252.compute-1.amazonaws.com',
+const sequelize = new Sequelize('dctid6srkf62qd', 'ogadhimkuyujkl', 'e27283a2a49b7118d1345b53a43af8a741bf62227c50611714d01f77fd03fafb', {
+    host: 'ec2-54-204-128-96.compute-1.amazonaws.com',
     
     logging: false,
-    pool:{
-        max: 5,
-        min:0,
-        acqire: 30000,
-        idle: 10000
-    }
+    
 });
 
 module.exports = sequelize;
