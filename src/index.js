@@ -22,7 +22,9 @@ app.use("/", (req, res)=>{
 
 sequelize.sync().then((result) => {
     app.listen(process.env.PORT || '5000', ()=>{
-        console.log("You are on port 5000");
+        var host = server.address().address
+  var port = server.address().port
+        console.log("App listening at http://%s:%s", host, port);
     });
 }).catch(err => {
     console.log(err)
