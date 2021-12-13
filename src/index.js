@@ -21,7 +21,7 @@ app.use("/", (req, res)=>{
 
 
 sequelize.sync().then((result) => {
-    app.listen('delivery-app101.herokuapp.com', ()=>{
+    app.listen(process.env.PORT || '5000', ()=>{
         console.log("You are on port 5000");
     });
 }).catch(err => {
