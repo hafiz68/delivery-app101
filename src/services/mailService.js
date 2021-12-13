@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
-const { tokengenerator } = require('./authService');
 
 
 
@@ -16,13 +15,15 @@ const sendingmail = async(email, mailText) =>{
         }
       });
       
-      transporter.on('token', token => {
-        console.log('A new access token was generated');
-        console.log('User: %s', token.user);
-        console.log('Access Token: %s', token.accessToken);
-        console.log('Expires: %s', new Date(token.expires));
-      });
-        let transporter = nodemailer.createTransport(smtpTransport({
+      
+        let transporter = nodemailer.createTransport(smtpTransport(
+          transporter.on('token', token => {
+            console.log('A new access token was generated');
+            console.log('User: %s', token.user);
+            console.log('Access Token: %s', token.accessToken);
+            console.log('Expires: %s', new Date(token.expires));
+          }),
+          {          
             service: 'gmail',
             authentication: 'plain',
             port: 587,
