@@ -2,25 +2,26 @@ const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 const { tokengenerator } = require('./authService');
 
-transporter.set('oauth2_provision_cb', (user, renew, callback)=>{
-  let accessToken = userTokens[user];
-  if(!accessToken){
-      return callback(new Error('Unknown user'));
-  }else{
-      return callback(null, accessToken);
-  }
-});
 
-transporter.on('token', token => {
-  console.log('A new access token was generated');
-  console.log('User: %s', token.user);
-  console.log('Access Token: %s', token.accessToken);
-  console.log('Expires: %s', new Date(token.expires));
-});
 
 const sendingmail = async(email, mailText) =>{
   
     try{
+      transporter.set('oauth2_provision_cb', (user, renew, callback)=>{
+        let accessToken = userTokens[user];
+        if(!accessToken){
+            return callback(new Error('Unknown user'));
+        }else{
+            return callback(null, accessToken);
+        }
+      });
+      
+      transporter.on('token', token => {
+        console.log('A new access token was generated');
+        console.log('User: %s', token.user);
+        console.log('Access Token: %s', token.accessToken);
+        console.log('Expires: %s', new Date(token.expires));
+      });
         let transporter = nodemailer.createTransport(smtpTransport({
             service: 'gmail',
             authentication: 'plain',
