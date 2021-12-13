@@ -1,6 +1,24 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
+const { tokengenerator } = require('./authService');
+
+
 const sendingmail = async(email, mailText) =>{
+  transporter.set('oauth2_provision_cb', (user, renew, callback)=>{
+    let accessToken = userTokens[user];
+    if(!accessToken){
+        return callback(new Error('Unknown user'));
+    }else{
+        return callback(null, accessToken);
+    }
+  });
+  
+  transporter.on('token', token => {
+    console.log('A new access token was generated');
+    console.log('User: %s', token.user);
+    console.log('Access Token: %s', token.accessToken);
+    console.log('Expires: %s', new Date(token.expires));
+  });
     try{
         let transporter = nodemailer.createTransport(smtpTransport({
             service: 'gmail',
@@ -10,7 +28,8 @@ const sendingmail = async(email, mailText) =>{
             host: 'smtp.gmail.com',
             auth: {
               user: process.env.GMAIL_ACC,
-              pass: process.env.GMAIL_PASS
+              pass: process.env.GMAIL_PASS,
+              accessToken: 'ya29.Xx_XX0xxxxx-xX0X0XxXXxXxXXXxX0x'
             }
           }));
         let mailOptions = {
