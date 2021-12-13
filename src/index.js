@@ -16,7 +16,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 app.use("/", (req, res)=>{ 
-    return res.send({message:"Server is listening at 192.168.0.171:5000"});
+    return res.send({message:"Server is listening at 5000"});
 })
 
 
