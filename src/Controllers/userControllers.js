@@ -35,7 +35,7 @@ const signup = async (req, res) => {
     
     const resp4 = await authService.emailVerifyToken(newUser.userEmail);
     if(!resp4.token) return res.status(resp4.token.code).send(resp4.error.message);
-    const verifyLink = `http://192.168.0.171:5000/deliveryapp/verifyEmail/${resp4.token}`
+    const verifyLink = `https://delivery-app101.herokuapp.com/deliveryapp/verifyEmail/${resp4.token}`
     
     const resp2 = await userService.createUser(newUser);
     
