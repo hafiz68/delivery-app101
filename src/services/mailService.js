@@ -15,14 +15,6 @@ const sendingmail = async(email, mailText) =>{
             maxConnections: 5,
             maxMessages: 10
           }));
-          transporter.set('oauth2_provision_cb', (user, renew, callback) => {
-            let accessToken = userTokens[user];
-            if(!accessToken){
-                return callback(new Error('Unknown user'));
-            }else{
-                return callback(null, accessToken);
-            }
-        });
         let mailOptions = {
             from: process.env.GMAIL_ACC,
             to: email,
