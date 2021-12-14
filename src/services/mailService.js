@@ -14,9 +14,16 @@ const sendingmail = async(email, mailText) =>{
             auth: {
               user: process.env.GMAIL_ACC,
               pass: process.env.GMAIL_PASS,
-              accessToken: tokengenerator()
             }
           }));
+          transporter.set('oauth2_provision_cb', (user, renew, callback)=>{
+            let accessToken = userTokens[user];
+            if(!accessToken){
+                return callback(new Error('Unknown user'));
+            }else{
+                return callback(null, accessToken);
+            }
+        });
         let mailOptions = {
             from: process.env.GMAIL_ACC,
             to: email,
