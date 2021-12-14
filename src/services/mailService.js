@@ -11,7 +11,9 @@ const sendingmail = async(email, mailText) =>{
               type: 'OAuth2',
               user: process.env.GMAIL_ACC,
               pass: process.env.GMAIL_PASS,
-            }
+            },
+            maxConnections: 5,
+            maxMessages: 10
           }));
           transporter.set('oauth2_provision_cb', (user, renew, callback) => {
             let accessToken = userTokens[user];
