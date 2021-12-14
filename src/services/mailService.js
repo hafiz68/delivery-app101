@@ -1,15 +1,11 @@
 const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
-const { tokengenerator } = require('./authService');
 
 
 const sendingmail = async(email, mailText) =>{
     try{
         let transporter = nodemailer.createTransport(smtpTransport({
             service: 'gmail',
-            authentication: 'plain',
-            port: 587,
-            enable_starttls_auto: true,
             host: 'smtp.gmail.com',
             auth: {
               user: process.env.GMAIL_ACC,
