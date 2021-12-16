@@ -27,7 +27,7 @@ const updateUser = async({ userName, userEmail, userPassword, role, phoneNo, bir
 const updateUserPass = async(userPassword, id) => {
     try {
         const updatedUser = await Users.update( 
-           userPassword , {where: { id}});
+           {userPassword: userPassword} , {where: { id}});
         if(!updatedUser) return {error: {message: "Something went wrong, try again", code: 500}};
         console.log(updatedUser);
         return {updatedUser: updatedUser};
