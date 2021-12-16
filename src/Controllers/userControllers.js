@@ -171,12 +171,15 @@ const updatePass = async (req, res) => {
       userPassword,
       resp2.user.userPassword
     );
+    console.log("here;" ,newPassword);
+
     if (resp3.error)
       return res.status(resp3.error.code).send(resp3.error.message);
     const salt = await bcrypt.genSalt(12);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
-    resp2.user.userPassword = hashedPassword;
-    const resp4 = await userService.updateUser(resp2.user, id);
+     resp2.user.userPassword = hashedPassword;
+    
+    const resp4 = await userService.updateUserPass(resp2.user.userPassword, id);
     if (resp4.error)
       return res.status(resp4.error.code).send(resp4.error.message);
     return res.status(200).send({ updatedUser: "password updated" });
