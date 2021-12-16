@@ -206,8 +206,8 @@ const forgetPass = async (req, res) => {
     const hashedPassword = await bcrypt.hash(randomCode.toString(), salt);
     resp.user.userPassword = hashedPassword;
     console.log(hashedPassword);
-    const resp4 = await userService.updateUser(
-      resp.user.toJSON(),
+    const resp4 = await userService.updateUserPass(
+      resp.user.userPassword,
       resp.user.id
     );
     if (resp4.error)
