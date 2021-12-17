@@ -131,6 +131,14 @@ const deleteShipment = async(req, res)=>{
         const resp = await authService.toknVerification(token);
         if(resp.error) return res.status(resp.error.code).send(resp.error.message);
        if(resp.decoder.email != email && resp.decoder.role != "admin")return res.status(403).send("Please sign up first");
+       const resp1 = await itemservices.getItemByShipmentId(id) ; 
+       if(resp1.error) return res.status(resp1.error.code).send(resp1.error.message);
+       for (i=0; i< resps1.length ; i++ ){
+        const resp7 = await itemservices.createItem(items[i]);
+        if (resp7.error) return res.status(resp7.error.code).send(resp7.error.message);
+        console.log(resp7)
+
+    }
        const resp2 = await shipmentservice.getShipmentById(id) ; 
         if(resp2.error) return res.status(resp2.error.code).send(resp2.error.message);
         const resp3 = await shipmentservice.deleteShipment(id);
