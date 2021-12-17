@@ -4,6 +4,7 @@ const cors = require ("cors");
 const sequelize = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const modeRoutes = require('./routes/modesRoutes');
+const itemRoutes = require('./routes/itemRoutes');
 const shipmentroutes = require('./routes/sipmentRoutes');
 const { Items, Users, Shipments, ShipmentModes } = require('./models');
 app.use(cors());
@@ -11,6 +12,8 @@ app.use(express.json());
 app.use("/deliveryapp", userRoutes);
 app.use("/deliveryapp", modeRoutes);
 app.use("/deliveryapp", shipmentroutes);
+app.use("/deliveryapp", itemRoutes);
+
 
 const dotenv = require('dotenv');
 dotenv.config();
