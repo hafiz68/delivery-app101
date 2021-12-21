@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 
 
 
-const getModes = async(req, res)=>{
+const getItems = async(req, res)=>{
     try{
         let Items = await Items.findAll();
          return  res.status(200).send({Items});
@@ -43,7 +43,7 @@ const delItemById = async(req, res)=>{
 
 module.exports = {
     
-    getModes,
+    getItems,
     getItemById,
     delItemById
 }
