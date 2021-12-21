@@ -40,10 +40,30 @@ const delItemById = async(req, res)=>{
     }
     
 };
+const updateItem = async(req, res) => {
+    const {id} = req.params;
+    const {itemType, itemName, weight} = req.body;
+    try {
+        let user = {
+            itemType: itemType, 
+            itemName: itemName, 
+            weight: weight
+        }
+        const updatedUser = await Items.update( 
+           user , {where: { id}});
+        if(!updatedUser) return {error: {message: "Something went wrong, try again", code: 500}};
+        console.log(updatedUser);
+        return {updatedUser: updatedUser};
+    } catch (error) {
+        console.log(error);
+        return {error: {message: "Something went wrong, try again", code: 500}};
+    }
+};
 
 module.exports = {
     
     getItems,
     getItemById,
-    delItemById
+    delItemById,
+    updateItem
 }
