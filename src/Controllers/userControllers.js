@@ -290,5 +290,6 @@ module.exports = {
   allCustomers,
   getById,
   deleteUser,
-  verifyEmail
+  verifyEmail,
+  
 };

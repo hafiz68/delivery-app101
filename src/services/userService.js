@@ -113,6 +113,7 @@ const verifyEmailUpdate = async(id)=>{
     
 };
 
+
 module.exports = {
     createUser,
     getUserByEmail,
